@@ -43,9 +43,3 @@ export default function Home(): React.ReactElement {
     </div>
   );
 }
-
-export const metadata = {
-  title: 'Your App Name',
-  description: 'Your app description',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-}
