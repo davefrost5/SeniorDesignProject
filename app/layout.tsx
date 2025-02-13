@@ -9,6 +9,11 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'SYNC Prosthetics - Signal-Yielding Neuro Cognitive Prosthetics',
   description: 'Pioneering the future of neural interface prosthetics with cutting-edge technology and innovative solutions.',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 export default function RootLayout({
