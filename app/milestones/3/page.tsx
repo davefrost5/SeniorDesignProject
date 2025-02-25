@@ -7,7 +7,7 @@ import { ConceptCard } from "@/app/milestones/concept-card";
 import { SpecsList } from "@/app/milestones/specs-list";
 import { ClipboardList, Lightbulb, Cpu, FlaskConical, Wrench, TestTube } from "lucide-react";
 import openGUIimg from "@/app/images/openGUIimg.png";
-import npipeline from "@/app/images/npipeline.png";
+import npipeline from "@/app/images/NPIPELINE.png";
 import proto1 from "@/app/images/proto1.png";
 import testSD1 from "@/app/images/testSD1.gif";
 import headset from "@/app/images/headset.png";
