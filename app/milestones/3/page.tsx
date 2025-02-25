@@ -104,7 +104,7 @@ export default function Milestone3Page() {
                   <div className="space-y-4">
                     <h3 className="text-lg font-semibold">Results</h3>
                     <p className="text-muted-foreground">
-                      Videos below is our first succesful closing of the hand. As one can see, the prototype is still in its eary stages, and our team shall use this video to make adequate updates to the prototype in coming weeks. Currently we are able to see real time dta from the EEG headset through NeuroPype, but the video below is not showing the data move the motor. Our next step is to use the streamed data to control the motor after the same makes some more small prototype and development updates. picutred below the data are outputs from NeuroPype.  
+                      Videos below is our first succesful closing of the hand. As one can see, the prototype is still in its eary stages, and our team shall use this video to make adequate updates to the prototype in coming weeks. Currently we are able to see real time dta from the EEG headset through NeuroPype, but the video below is not showing the data move the motor. Our next step is to use the streamed data to control the motor after the same makes some more small prototype and development updates.  
                     </p>
                     <div className="mt-4">
                       <Image
