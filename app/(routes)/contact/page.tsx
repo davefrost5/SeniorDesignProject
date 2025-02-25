@@ -99,7 +99,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold">Phone</h3>
                     <p className="text-sm text-muted-foreground">
-                      +1 (555) 123-4567
+                      +1 (908) 331-5306
                     </p>
                   </div>
                 </div>
@@ -113,7 +113,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold">Email</h3>
                     <p className="text-sm text-muted-foreground">
-                      contact@example.com
+                      dfrost1@stevens.edu
                     </p>
                   </div>
                 </div>
