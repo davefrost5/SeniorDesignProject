@@ -7,7 +7,7 @@ import { ConceptCard } from "@/app/milestones/concept-card";
 import { SpecsList } from "@/app/milestones/specs-list";
 import { ClipboardList, Lightbulb, Cpu, FlaskConical, Wrench, TestTube } from "lucide-react";
 import openGUIimg from "@/app/images/openGUIimg.png";
-import NPIPELINE from "@/app/images/npipeline.png";
+import npipeline from "@/app/images/npipeline.png";
 import proto1 from "@/app/images/proto1.png";
 import testSD1 from "@/app/images/testSD1.gif";
 import headset from "@/app/images/headset.png";
@@ -85,7 +85,7 @@ export default function Milestone3Page() {
                     </p>
                     <div className="mt-4">
                       <Image
-                        src={NPIPELINE} // Update with the correct path to your image
+                        src={npipeline} // Update with the correct path to your image
                         alt="NPIPELINE"
                         width={1000} // Adjust width as needed
                         height={700} // Adjust height as needed
