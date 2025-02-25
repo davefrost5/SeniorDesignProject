@@ -18,6 +18,8 @@ const aboutDropdownItems = [
   { name: "Team", href: "/about/team" },
   { name: "Equipment", href: "/about/equipment" },
   { name: "Software", href: "/about/software" },
+  { name: "Expenses", href: "/about/expenses" },
+
 ];
 
 const milestonesDropdownItems = [
@@ -39,8 +41,8 @@ export function Navbar() {
               <Image
                 src={logo}
                 alt="SYNC Prosthetics Logo"
-                width={80}
-                height={80}
+                width={50}
+                height={50}
                 className="object-contain"
               />
               <span className="text-xl font-bold">SYNC Prosthetics</span>
