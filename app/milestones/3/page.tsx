@@ -11,6 +11,8 @@ import npipeline from "@/app/images/NPIPELINE.png";
 import proto1 from "@/app/images/proto1.png";
 import testSD1 from "@/app/images/testSD1.gif";
 import headset from "@/app/images/headset.png";
+import NPChart from "@/app/images/NPChart.png";
+import NPChart2 from "@/app/images/NPChart2.png";
 import React from 'react';
 
 // Define the type for table data
@@ -81,7 +83,7 @@ export default function Milestone3Page() {
                   <div className="space-y-4">
                     <h3 className="text-lg font-semibold">NeuroPype Pipeline</h3>
                     <p className="text-muted-foreground">
-                      Upon completion of calibration, the pipeline is trained, providing data outputs on charts. Afterwards, the real time EEG data is streamed into the pipeline, which then displays the data in thew same graph. We use this data along with our python scripts to output whether the user wants the hand to open or close. Finally the team uses a python script to connect this data to our reaspberry pi to move the exoskeleton.
+                      Upon completion of calibration, the pipeline is trained, providing data outputs on charts. Afterwards, the real time EEG data is streamed into the pipeline, which then displays the data in thew same graph. We use this data along with our Python scripts to output whether the user wants the hand to open or close. Finally the team uses a Python script to connect this data to our reaspberry pi to move the exoskeleton.
                     </p>
                     <div className="mt-4">
                       <Image
@@ -92,12 +94,33 @@ export default function Milestone3Page() {
                         className="rounded-lg shadow-md"
                       />
                     </div>
+                    <div className="mt-4 flex space-x-4">
+                      <Image
+                        src={NPChart} // Update with the correct path to your image
+                        alt="NeuroPype Chart"
+                        width={500} // Adjust width as needed
+                        height={350} // Adjust height as needed
+                        className="rounded-lg shadow-md"
+                      />
+                      <Image
+                        src={NPChart2} // Update with the correct path to your image
+                        alt="NeuroPype Chart 2"
+                        width={500} // Adjust width as needed
+                        height={350} // Adjust height as needed
+                        className="rounded-lg shadow-md"
+                      />
+                    </div>
+                    <div className="mt-4 bg-gray-100 p-4 rounded-lg shadow-md">
+                      <p className="text-muted-foreground">
+                        The charts above show the data from the NeuroPype Pipeline. The first chart shows the data from the Open vs. Closed signals, and the second chart shows the data from the real time EEG data. These charts are both based on the probability of the Open or Close thought presence. 
+                      </p>
+                    </div>
                   </div>
 
                   <div className="space-y-4">
                     <h3 className="text-lg font-semibold">Python Scripts</h3>
                     <p className="text-muted-foreground">
-                      The team also shall create their own final Python scripts to use these brain signals and control our prototype. We will test these scripts thoroughly without the EEG data, then ultimately combine our scripts with the NeuroPype Pipeline to use the Headset to move the prototype. As of now the scripts connect to neuropype and both send calibration data to the pipeline, and receive real time data from the pipleine. Moving forward the team shall refine these scripts to ensure seamless connection to the raspberry pi in order to move tha exoskeleton.
+                      The team also shall create their own final Python scripts to use these brain signals and control our prototype. We will test these scripts thoroughly without the EEG data, then ultimately combine our scripts with the NeuroPype Pipeline to use the Headset to move the prototype. As of now the scripts connect to neuropype and both send calibration data to the pipeline, and receive real time data from the pipleine. Moving forward the team shall refine these scripts to ensure seamless connection to the Raspberry PI in order to move tha exoskeleton.
                     </p>
                   </div>
 
@@ -138,7 +161,7 @@ export default function Milestone3Page() {
                       items={[
                         "3D Printing: Utilized advanced 3D printing techniques to create custom parts for the prototype.",
                         "Wire Attachment: Once the 3D printed parts were created, the team attached outside materials (finger caps, string, etc.) to the prototype to ensure the system is properly connected.",
-                        "Raspberry Pi Integration: Integrated Raspberry Pi for processing and control functionalities.",
+                        "Raspberry PI Integration: Integrated Raspberry PI for processing and control functionalities.",
                         "Prototype Testing: Performed extensive testing to validate the design and functionality of the prototype."
                       ]}
                     />
@@ -151,7 +174,7 @@ export default function Milestone3Page() {
                       items={[
                         "Connected the OpenBCI GUI to the NeuroPype Pipeline via LSL stream",
                         "Corrected NeuroPype Nodes to properly display Open vs. Closed signals",
-                        "Developed python scripts to connect to NeuroPype, organize data, and connect the raspberry pi to the real time open vs. closed data",
+                        "Developed Python scripts to connect to NeuroPype, organize data, and connect the Raspberry PI to the real time open vs. closed data",
                         "Trained the model on multiple runs of the data to ensure the model is properly trained",
                         "Tested the system with the EEG headset and prototype to ensure the system works as expected"
                       ]}
