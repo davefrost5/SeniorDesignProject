@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'SYNC Prosthetics - Signal-Yielding Neuro Cognitive Prosthetics',
-  description: 'Pioneering the future of neural interface prosthetics with cutting-edge technology and innovative solutions.',
+  description:
+    'Brain-controlled orthotic hand exoskeleton from Stevens senior design. L3Harris Innovation Award winner. EEG to actuation with zero-calibration motor imagery.',
 };
 
 export const viewport: Viewport = {

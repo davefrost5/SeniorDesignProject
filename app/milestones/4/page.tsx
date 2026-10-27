@@ -9,28 +9,34 @@ import npipeline from "@/app/images/NPIPELINE.png";
 import proto1 from "@/app/images/proto1.png";
 import testSD1 from "@/app/images/testSD1.gif";
 import headset from "@/app/images/headset.png";
-import React from 'react';
-
-// Define the type for table data
-interface ExpenseItem {
-  stuff: string;
-  price: string;
-  description: string;
-  link?: string;
-  date?: string;
-}
+import Link from "next/link";
+import { MilestonePageHeader } from "@/components/milestones/milestone-page-header";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function Milestone4Page() {
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Milestone 4: Optimization, Delivery, and Management</h1>
+        <MilestonePageHeader
+          title="Milestone 4: Optimization, Delivery, and Expo"
+          period="Spring 2025 - May 2025 Expo"
+          status="Awarded"
+        />
+
+        <div className="mb-8 flex flex-wrap gap-2 justify-center">
+          <Badge className="bg-blue-600 hover:bg-blue-600/90">
+            L3Harris Senior Design / Innovation Award
+          </Badge>
+          <Badge variant="secondary">Stevens Innovation Expo ~May 2025</Badge>
+        </div>
         
-        <Tabs defaultValue="optimization" className="space-y-8">
-          <TabsList className="grid grid-cols-3 w-full bg-gray-100 rounded-lg shadow-md">
+        <Tabs defaultValue="delivery" className="space-y-8">
+          <TabsList className="grid grid-cols-4 w-full bg-gray-100 rounded-lg shadow-md">
             <TabsTrigger value="optimization" className="hover:bg-blue-100">Optimization</TabsTrigger>
             <TabsTrigger value="delivery" className="hover:bg-blue-100">Delivery</TabsTrigger>
+            <TabsTrigger value="expo" className="hover:bg-blue-100">Expo and Award</TabsTrigger>
             <TabsTrigger value="management" className="hover:bg-blue-100">Management</TabsTrigger>
           </TabsList>
 
@@ -71,17 +77,73 @@ export default function Milestone4Page() {
 
           <TabsContent value="delivery">
             <Card>
-              <CardContent>
-                <h3 className="text-lg font-semibold">Delivery Details</h3>
-                <div className="mt-4">
-                                <p className="text-muted-foreground mt-4">
-                  The Video below is the first video of the prosthetic hand in action. As you can see at the 2 second mark the closed thought trigglers the hand to close. After 10 seconds, on the screen you can see the GUI switch to an open command, which will then reopen the hand.  We used Artificial Intelligence to classify the user's intent with no calibration, and then used that intent to control the prosthetic hand.
+              <CardContent className="pt-6 space-y-4">
+                <h3 className="text-lg font-semibold">Delivery demo</h3>
+                <p className="text-muted-foreground">
+                  At the 2 second mark a close thought triggers the hand to close. After about
+                  10 seconds the GUI switches to an open command and the hand releases. AI
+                  classifies intent with no per-user calibration and drives the orthotic in
+                  real time.
                 </p>
-                <video controls width="100%">
+                <video controls className="w-full rounded-lg border">
                   <source src="/firstVid.mp4" type="video/mp4" />
                 </video>
-                </div>
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/#demo">Open on home page</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </TabsContent>
 
+          <TabsContent value="expo">
+            <Card>
+              <CardContent className="pt-6 space-y-6">
+                <h3 className="text-lg font-semibold">Stevens Innovation Expo and L3Harris award</h3>
+                <p className="text-muted-foreground">
+                  At the Innovation Expo (~May 2025), roughly thirty visitors tried the glove
+                  with zero calibration. The AI/ML pipeline was the minimum viable product
+                  on display. An occupational therapist shared that the system could change
+                  stroke rehabilitation workflows. We observed motor imagery working when users
+                  imagined commands in a non-English language.
+                </p>
+                <p className="text-muted-foreground">
+                  The team won the L3Harris Senior Design / Innovation Award for the capstone.
+                  Verified EEG metrics from expo testing: Common Spatial Patterns plus logistic
+                  regression at 84% accuracy on motor imagery across 30+ users, with confidence
+                  gating and live feedback in the full acquisition-to-actuation stack.
+                </p>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <Link
+                      href="https://www.linkedin.com/posts/davefrost525_along-with-cooper-foote-nicolas-accardo-activity-7328464454436728832-X_pG"
+                      className="text-blue-600 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      LinkedIn: Expo demo with team
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.linkedin.com/posts/davefrost525_here-is-an-additional-video-from-the-senior-activity-7328514354331451392-SuZI"
+                      className="text-blue-600 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      LinkedIn: Additional senior design video
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.linkedin.com/posts/davefrost525_the-stevens-innovation-expo-is-coming-up-activity-7323075848230653953-M4t5"
+                      className="text-blue-600 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      LinkedIn: Innovation Expo preview
+                    </Link>
+                  </li>
+                </ul>
               </CardContent>
             </Card>
           </TabsContent>
@@ -116,9 +178,12 @@ export default function Milestone4Page() {
                 </Card>
                 <Card className="mt-4">
                   <CardContent>
-                    <h4 className="text-md font-semibold">⏱️ Timely Completion</h4>
+                    <h4 className="text-md font-semibold">Timely completion</h4>
                     <p className="text-muted-foreground">
-                      As of the current milestone, the system successfully supports real-time hand movement classification using an OpenBCI headset, with a functional GUI interface and fully tested training and prediction scripts. We are on track for final testing, Raspberry Pi deployment, and demonstration within the senior design timeline.
+                      Delivered on the senior design timeline: real-time hand movement
+                      classification with OpenBCI, functional GUI, trained prediction scripts,
+                      Raspberry Pi deployment, Innovation Expo demos, and the L3Harris
+                      Innovation Award.
                     </p>
                   </CardContent>
                 </Card>
