@@ -72,28 +72,19 @@ const demoVideos: {
 
 const team = [
   {
-    name: "David Frost",
-    role: "Software and AI/ML lead",
-    image: null as string | null,
-    initials: "DF",
-  },
-  {
     name: "Cooper Foote",
     role: "Hardware and manufacturing",
     image: syncCoop,
-    initials: null,
   },
   {
     name: "Nicolas Accardo",
     role: "Backend and NeuroPype pipeline",
     image: syncNick,
-    initials: null,
   },
   {
     name: "Owen Deem",
     role: "Prototype development",
     image: syncOwen,
-    initials: null,
   },
 ];
 
@@ -365,29 +356,20 @@ export default function Home(): React.ReactElement {
       <section className="sync-section relative">
         <div className="container mx-auto px-4">
           <h2 className="sync-heading mb-10 text-center">Team</h2>
-          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-3">
             {team.map((member) => (
               <div
                 key={member.name}
                 className="sync-panel flex flex-col items-center px-4 py-6 text-center"
               >
-                {member.image ? (
-                  <div className="relative mb-4 h-24 w-24 overflow-hidden rounded-full ring-2 ring-violet-500/35 ring-offset-2 ring-offset-background sm:h-28 sm:w-28">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover object-top"
-                    />
-                  </div>
-                ) : (
-                  <div
-                    className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-violet-700 text-2xl font-bold text-white ring-2 ring-violet-500/35 ring-offset-2 ring-offset-background sm:h-28 sm:w-28"
-                    aria-hidden
-                  >
-                    {member.initials}
-                  </div>
-                )}
+                <div className="relative mb-4 h-24 w-24 overflow-hidden rounded-full ring-2 ring-violet-500/35 ring-offset-2 ring-offset-background sm:h-28 sm:w-28">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
                 <p className="font-semibold">{member.name}</p>
                 <p className="text-sm text-muted-foreground">{member.role}</p>
               </div>
