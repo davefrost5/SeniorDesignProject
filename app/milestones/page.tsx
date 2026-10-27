@@ -11,8 +11,8 @@ export default function MilestonesOverviewPage() {
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-5xl mx-auto space-y-10">
         <header className="space-y-4 text-center">
-          <Badge className="bg-emerald-600 hover:bg-emerald-600/90">
-            Capstone milestones complete
+          <Badge className="border-0 bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90">
+            Stevens build complete - L3Harris awarded
           </Badge>
           <h1 className="text-4xl font-bold tracking-tight">Project milestones</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
