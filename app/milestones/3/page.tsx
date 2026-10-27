@@ -13,24 +13,18 @@ import testSD1 from "@/app/images/testSD1.gif";
 import headset from "@/app/images/headset.png";
 import NPChart from "@/app/images/NPChart.png";
 import NPChart2 from "@/app/images/NPChart2.png";
-import React from 'react';
-
-// Define the type for table data
-interface ExpenseItem {
-  stuff: string;
-  price: string;
-  description: string;
-  link?: string;
-  date?: string;
-}
+import { MilestonePageHeader } from "@/components/milestones/milestone-page-header";
 
 export default function Milestone3Page() {
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Milestone 3: Implementation &
-           Testing</h1>
+        <MilestonePageHeader
+          title="Milestone 3: Implementation and Testing"
+          period="Spring 2025"
+          status="Completed"
+        />
         
         <Tabs defaultValue="implementation" className="space-y-8">
           <TabsList className="grid grid-cols-3 w-full">
@@ -125,9 +119,11 @@ export default function Milestone3Page() {
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Results</h3>
+                    <h3 className="text-lg font-semibold">Results (mid-capstone snapshot)</h3>
                     <p className="text-muted-foreground">
-                      Videos below is our first succesful closing of the hand. As one can see, the prototype is still in its eary stages, and our team shall use this video to make adequate updates to the prototype in coming weeks. Currently we are able to see real time dta from the EEG headset through NeuroPype, but the video below is not showing the data move the motor. Our next step is to use the streamed data to control the motor after the same makes some more small prototype and development updates.  
+                      The GIF below captures an early successful hand close during integration
+                      work. Final zero-calibration ML control and expo delivery are documented
+                      in Milestone 4 and on the home demo video.
                     </p>
                     <div className="mt-4">
                       <Image

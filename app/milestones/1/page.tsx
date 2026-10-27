@@ -3,12 +3,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight, Users, Brain, ClipboardCheck, GitCommit } from "lucide-react";
+import { MilestonePageHeader } from "@/components/milestones/milestone-page-header";
 
 export default function Milestone1Page() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Milestone 1: Market Analysis & Requirements</h1>
+        <MilestonePageHeader
+          title="Milestone 1: Market Analysis and Requirements"
+          period="Fall 2024"
+          status="Completed"
+        />
         
         <Tabs defaultValue="customers" className="space-y-8">
           <TabsList className="grid grid-cols-4 w-full">

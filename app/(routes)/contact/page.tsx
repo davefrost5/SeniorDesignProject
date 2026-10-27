@@ -24,7 +24,11 @@ export default function ContactPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
+        <h1 className="text-4xl font-bold mb-4">Contact</h1>
+        <p className="text-muted-foreground mb-8 max-w-2xl">
+          Continuing SYNC Prosthetics beyond Stevens senior design. Reach David Frost for
+          partnerships, advisors, collaborators, or demo follow-ups.
+        </p>
 
         <div className="grid md:grid-cols-3 gap-8">
           <Card className="md:col-span-2">
@@ -106,14 +110,20 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="border-blue-600/30">
               <CardContent className="pt-6">
                 <div className="flex items-center space-x-4">
                   <Mail className="h-5 w-5 text-primary" />
                   <div>
-                    <h3 className="font-semibold">Email</h3>
-                    <p className="text-sm text-muted-foreground">
-                      dfrost1@stevens.edu
+                    <h3 className="font-semibold">Primary email</h3>
+                    <a
+                      href="mailto:dfrost3374@gmail.com"
+                      className="text-sm text-blue-600 hover:underline font-medium"
+                    >
+                      dfrost3374@gmail.com
+                    </a>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      School: dfrost1@stevens.edu
                     </p>
                   </div>
                 </div>
