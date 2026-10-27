@@ -6,6 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
+  BrandVideoFrame,
+  type VideoOrientation,
+} from "@/components/home/brand-video-frame";
+import {
   Award,
   Brain,
   ChevronRight,
@@ -21,22 +25,32 @@ import syncNick from "@/app/images/syncnick.png";
 import syncOwen from "@/app/images/syncowen.png";
 import { milestones, PROJECT_TIMELINE } from "@/lib/milestones-data";
 
-const demoVideos = [
+const demoVideos: {
+  id: string;
+  title: string;
+  description: string;
+  src: string;
+  orientation: VideoOrientation;
+  linkedInPost: string | null;
+  linkedInEmbed: string | null;
+}[] = [
   {
-    id: "capstone",
-    title: "Capstone delivery demo",
+    id: "delivery",
+    title: "Live control demo",
     description:
       "At ~2s a close thought triggers grasp; the GUI switches to open and the hand releases - zero-calibration ML driving the exoskeleton.",
     src: "/firstVid.mp4",
-    linkedInPost: null as string | null,
-    linkedInEmbed: null as string | null,
+    orientation: "landscape",
+    linkedInPost: null,
+    linkedInEmbed: null,
   },
   {
     id: "expo-1",
     title: "Stevens Innovation Expo - table demo",
     description:
-      "Senior Innovation Expo booth: a line of users tried the glove with zero calibration (~30 attempts across the day).",
+      "Expo booth: a line of users tried the glove with zero calibration (~30 attempts across the day).",
     src: "/sync_expo_1.mp4",
+    orientation: "portrait",
     linkedInPost:
       "https://www.linkedin.com/posts/davefrost525_along-with-cooper-foote-nicolas-accardo-activity-7328464454436728832-X_pG",
     linkedInEmbed:
@@ -44,9 +58,10 @@ const demoVideos = [
   },
   {
     id: "expo-2",
-    title: "Senior Design expo - additional footage",
-    description: "Additional expo video from senior design demonstrations at Stevens.",
+    title: "Innovation Expo - additional footage",
+    description: "More demonstration footage from the Stevens expo floor.",
     src: "/sync_expo_2.mp4",
+    orientation: "portrait",
     linkedInPost:
       "https://www.linkedin.com/posts/davefrost525_here-is-an-additional-video-from-the-senior-activity-7328514354331451392-SuZI",
     linkedInEmbed:
@@ -102,36 +117,75 @@ const proofStats = [
   },
 ];
 
-export default function Home(): React.ReactElement {
+function VideoDemoCard({
+  video,
+}: {
+  video: (typeof demoVideos)[number];
+}) {
   return (
-    <div className="flex flex-col">
+    <article className="sync-glass-card overflow-hidden">
+      <div className="border-b border-violet-100/80 bg-gradient-to-r from-blue-600/5 to-violet-600/5 px-6 py-5">
+        <h3 className="text-lg font-semibold">{video.title}</h3>
+        <p className="mt-1 text-sm sync-subheading">{video.description}</p>
+      </div>
+      <div className="px-4 py-6 sm:px-6">
+        <BrandVideoFrame src={video.src} orientation={video.orientation} />
+        {video.linkedInPost && (
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <Button asChild variant="outline" size="sm" className="border-violet-200/80 bg-white/80">
+              <Link href={video.linkedInPost} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Watch on LinkedIn
+              </Link>
+            </Button>
+            {video.linkedInEmbed && (
+              <Button asChild variant="ghost" size="sm" className="text-violet-700">
+                <Link href={video.linkedInEmbed} target="_blank" rel="noopener noreferrer">
+                  LinkedIn embed
+                </Link>
+              </Button>
+            )}
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}
+
+export default function Home(): React.ReactElement {
+  const [featured, ...expoClips] = demoVideos;
+
+  return (
+    <div className="sync-landing flex flex-col">
       {/* Hero */}
-      <section className="relative border-b overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-background to-purple-600/10" />
-        <div className="container mx-auto px-4 py-16 md:py-24 relative">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <Badge variant="secondary" className="text-sm px-4 py-1">
-              Stevens Senior Design 2024-2025 - Capstone complete
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="sync-section relative overflow-hidden pt-4 md:pt-8">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(99,102,241,0.18),transparent)]" />
+        <div className="container relative mx-auto px-4">
+          <div className="mx-auto max-w-4xl space-y-6 text-center">
+            <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
+              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
                 SYNC Prosthetics
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground font-medium">
+            <p className="text-lg font-medium text-violet-900/70 md:text-xl">
               Signal-Yielding Neuro Cognitive Prosthetics
             </p>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            <p className="mx-auto max-w-3xl text-base leading-relaxed sync-subheading md:text-lg">
               A brain-controlled orthotic hand exoskeleton built at Stevens Institute of
               Technology. We won the L3Harris Senior Design / Innovation Award, demoed at
               the Innovation Expo with zero-calibration motor imagery, and shipped the full
               EEG-to-actuation stack - now building what comes after graduation.
             </p>
             <div className="flex flex-wrap justify-center gap-3 pt-2">
-              <Button asChild size="lg">
+              <Button asChild size="lg" variant="brand">
                 <Link href="#demo">Watch the demo</Link>
               </Button>
-              <Button asChild size="lg" variant="outline">
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-violet-200/80 bg-white/60 backdrop-blur-sm hover:bg-white/90"
+              >
                 <Link href="/milestones">See milestones</Link>
               </Button>
             </div>
@@ -140,23 +194,31 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Proof strip */}
-      <section className="border-b bg-muted/40">
-        <div className="container mx-auto px-4 py-12">
-          <h2 className="text-2xl font-bold text-center mb-8">Proof we shipped</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+      <section className="sync-section bg-gradient-to-b from-violet-100/25 via-blue-50/40 to-transparent">
+        <div className="container mx-auto px-4">
+          <h2 className="sync-heading mb-3 text-center">Proof we shipped</h2>
+          <p className="mx-auto mb-10 max-w-2xl text-center text-sm sync-subheading">
+            Verified outcomes from Stevens demos and competition - not slide-deck claims.
+          </p>
+          <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {proofStats.map((item) => (
-              <Card key={item.label} className="bg-card/80">
-                <CardContent className="pt-6 space-y-2">
-                  <item.icon className="h-8 w-8 text-blue-600" />
-                  <p className="font-semibold text-sm leading-snug">{item.label}</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
+              <Card
+                key={item.label}
+                className="sync-glass-card border-violet-100/60 transition-shadow hover:shadow-xl hover:shadow-indigo-900/5"
+              >
+                <CardContent className="space-y-3 pt-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/15 to-violet-500/20">
+                    <item.icon className="h-5 w-5 text-blue-600" />
+                  </div>
+                  <p className="text-sm font-semibold leading-snug">{item.label}</p>
+                  <p className="text-xs leading-relaxed text-muted-foreground">
                     {item.detail}
                   </p>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground mt-6 max-w-2xl mx-auto">
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm sync-subheading">
             Motor imagery classification worked even when users imagined commands in a
             non-English language - a signal that the pipeline generalizes beyond lab
             conditions.
@@ -165,58 +227,25 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Video / Demo */}
-      <section id="demo" className="scroll-mt-20 border-b">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold">Demo and videos</h2>
-              <p className="text-muted-foreground">
+      <section
+        id="demo"
+        className="sync-section scroll-mt-20 bg-gradient-to-b from-transparent via-violet-50/35 to-blue-50/30"
+      >
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-5xl space-y-10">
+            <div className="space-y-2 text-center">
+              <h2 className="sync-heading">Demo and videos</h2>
+              <p className="sync-subheading">
                 All footage self-hosted. Zero-calibration AI classifies open vs. close intent
                 and drives the exoskeleton in real time.
               </p>
             </div>
 
-            <div className="space-y-10">
-              {demoVideos.map((video) => (
-                <Card key={video.id} className="overflow-hidden">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg">{video.title}</CardTitle>
-                    <p className="text-sm text-muted-foreground">{video.description}</p>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="rounded-xl overflow-hidden border shadow-lg bg-black">
-                      <video controls playsInline preload="metadata" className="w-full aspect-video">
-                        <source src={video.src} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                    {video.linkedInPost && (
-                      <div className="flex flex-wrap gap-2">
-                        <Button asChild variant="secondary" size="sm">
-                          <Link
-                            href={video.linkedInPost}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <ExternalLink className="h-4 w-4 mr-2" />
-                            Watch on LinkedIn
-                          </Link>
-                        </Button>
-                        {video.linkedInEmbed && (
-                          <Button asChild variant="outline" size="sm">
-                            <Link
-                              href={video.linkedInEmbed}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              LinkedIn embed
-                            </Link>
-                          </Button>
-                        )}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
+            <VideoDemoCard video={featured} />
+
+            <div className="grid gap-8 md:grid-cols-2">
+              {expoClips.map((video) => (
+                <VideoDemoCard key={video.id} video={video} />
               ))}
             </div>
           </div>
@@ -224,69 +253,74 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Tech stack */}
-      <section className="border-b bg-muted/20">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-            <div className="space-y-4">
-              <h2 className="text-3xl font-bold">How it works</h2>
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex gap-2">
-                  <Zap className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+      <section className="sync-section bg-gradient-to-b from-blue-50/30 via-white/50 to-violet-50/25">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-2">
+            <div className="space-y-5">
+              <h2 className="sync-heading">How it works</h2>
+              <ul className="space-y-4 sync-subheading">
+                <li className="flex gap-3 rounded-xl border border-violet-100/60 bg-white/60 p-4 backdrop-blur-sm">
+                  <Zap className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
                   OpenBCI UltraCortex streams EEG over LSL into our processing pipeline.
                 </li>
-                <li className="flex gap-2">
-                  <Brain className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+                <li className="flex gap-3 rounded-xl border border-violet-100/60 bg-white/60 p-4 backdrop-blur-sm">
+                  <Brain className="mt-0.5 h-5 w-5 shrink-0 text-violet-600" />
                   Common Spatial Patterns features feed logistic regression for motor
                   imagery (open vs. close).
                 </li>
-                <li className="flex gap-2">
-                  <Cpu className="h-5 w-5 text-blue-600 shrink-0 mt-0.5" />
+                <li className="flex gap-3 rounded-xl border border-violet-100/60 bg-white/60 p-4 backdrop-blur-sm">
+                  <Cpu className="mt-0.5 h-5 w-5 shrink-0 text-indigo-600" />
                   Confidence gating, live GUI feedback, and Raspberry Pi actuation close
                   the loop on the orthotic glove.
                 </li>
               </ul>
             </div>
-            <div className="relative h-64 rounded-xl overflow-hidden border">
+            <div className="relative h-72 overflow-hidden rounded-2xl border border-violet-200/50 shadow-lg shadow-indigo-900/10 md:h-80">
               <Image
                 src={syncDave}
                 alt="SYNC Prosthetics demo"
                 fill
                 className="object-cover object-top"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-violet-950/25 to-transparent" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Milestones teaser */}
-      <section className="border-b">
-        <div className="container mx-auto px-4 py-16">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+      <section className="sync-section bg-gradient-to-b from-violet-50/20 to-blue-50/35">
+        <div className="container mx-auto px-4">
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 className="text-3xl font-bold">Senior design arc</h2>
-              <p className="text-muted-foreground mt-2">
-                {PROJECT_TIMELINE.start} - {PROJECT_TIMELINE.end} - Expo{" "}
-                {PROJECT_TIMELINE.expo}. All school milestones complete.
+              <h2 className="sync-heading">From concept to award</h2>
+              <p className="mt-2 sync-subheading">
+                {PROJECT_TIMELINE.start} - {PROJECT_TIMELINE.end} - Innovation Expo{" "}
+                {PROJECT_TIMELINE.expo}. Full build history on the milestones page.
               </p>
             </div>
-            <Button asChild variant="outline">
+            <Button
+              asChild
+              variant="outline"
+              className="border-violet-200/80 bg-white/70 shrink-0"
+            >
               <Link href="/milestones">
                 Full timeline
-                <ChevronRight className="h-4 w-4 ml-1" />
+                <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {milestones.map((m) => (
               <Link key={m.id} href={m.href} className="group">
-                <Card className="h-full transition-shadow group-hover:shadow-md">
+                <Card className="sync-glass-card h-full transition-all group-hover:-translate-y-0.5 group-hover:shadow-xl group-hover:shadow-indigo-900/10">
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between gap-2">
                       <Badge
                         className={
                           m.status === "Awarded"
-                            ? "bg-blue-600 hover:bg-blue-600/90"
-                            : "bg-emerald-600 hover:bg-emerald-600/90 border-transparent"
+                            ? "bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90 border-0"
+                            : "border-0 bg-emerald-600/90 hover:bg-emerald-600"
                         }
                       >
                         {m.status}
@@ -298,7 +332,7 @@ export default function Home(): React.ReactElement {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-muted-foreground line-clamp-3">
+                    <p className="line-clamp-3 text-sm text-muted-foreground">
                       {m.highlights[0]}
                     </p>
                   </CardContent>
@@ -310,13 +344,16 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Team */}
-      <section className="border-b bg-muted/20">
-        <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl font-bold text-center mb-10">Team</h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+      <section className="sync-section bg-gradient-to-b from-blue-50/40 via-violet-50/20 to-violet-100/25">
+        <div className="container mx-auto px-4">
+          <h2 className="sync-heading mb-10 text-center">Team</h2>
+          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 lg:grid-cols-4">
             {team.map((member) => (
-              <div key={member.name} className="text-center space-y-3">
-                <div className="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-blue-600/20">
+              <div
+                key={member.name}
+                className="sync-glass-card flex flex-col items-center px-4 py-6 text-center"
+              >
+                <div className="relative mb-4 h-24 w-24 overflow-hidden rounded-full ring-2 ring-violet-300/50 ring-offset-2 ring-offset-white/80 sm:h-28 sm:w-28">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -324,16 +361,14 @@ export default function Home(): React.ReactElement {
                     className="object-cover object-top"
                   />
                 </div>
-                <div>
-                  <p className="font-semibold">{member.name}</p>
-                  <p className="text-sm text-muted-foreground">{member.role}</p>
-                </div>
+                <p className="font-semibold">{member.name}</p>
+                <p className="text-sm text-muted-foreground">{member.role}</p>
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground mt-8">
+          <p className="mt-8 text-center text-sm sync-subheading">
             Faculty advisor: Dr. Bernard Yett, Stevens ECE.{" "}
-            <Link href="/about/team" className="text-blue-600 hover:underline">
+            <Link href="/about/team" className="font-medium text-violet-700 hover:underline">
               Team page
             </Link>
           </p>
@@ -341,34 +376,40 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* What's next CTA */}
-      <section className="border-b">
-        <div className="container mx-auto px-4 py-16">
-          <Card className="max-w-3xl mx-auto bg-gradient-to-br from-blue-600/5 to-purple-600/5 border-blue-600/20">
-            <CardContent className="pt-10 pb-10 text-center space-y-6">
-              <h2 className="text-3xl font-bold">What is next</h2>
-              <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                The capstone proved the technology in front of judges, clinicians, and
-                dozens of expo visitors. David Frost is continuing SYNC Prosthetics after
-                graduation - seeking advisors, strategic partners, and collaborators (including
-                YC-style backers) who want to help take a working BCI orthotic from senior
-                design to the next product milestone. Not a slide deck - a demo that already
+      <section className="sync-section pb-20">
+        <div className="container mx-auto px-4">
+          <Card className="sync-glass-card mx-auto max-w-3xl overflow-hidden border-violet-200/60">
+            <div className="h-1 bg-gradient-to-r from-blue-600 via-violet-500 to-purple-600" />
+            <CardContent className="space-y-6 px-6 py-10 text-center sm:px-10">
+              <h2 className="sync-heading text-2xl md:text-3xl">What is next</h2>
+              <p className="mx-auto max-w-2xl leading-relaxed sync-subheading">
+                Public demos at the Innovation Expo and the L3Harris award proved the
+                technology in front of clinicians and dozens of visitors. David Frost is
+                continuing SYNC Prosthetics after graduation - seeking advisors, strategic
+                partners, and collaborators who want to help take a working BCI orthotic to
+                the next product milestone. Not a slide deck - hardware and ML that already
                 won an innovation award.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
-                <Button asChild size="lg">
+                <Button asChild size="lg" variant="brand">
                   <Link href="/contact">
-                    <Mail className="h-4 w-4 mr-2" />
+                    <Mail className="mr-2 h-4 w-4" />
                     Get in touch
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline">
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-violet-200/80 bg-white/70"
+                >
                   <Link href="/about">About David and SYNC</Link>
                 </Button>
               </div>
               <p className="text-sm">
                 <Link
                   href="mailto:dfrost3374@gmail.com"
-                  className="text-blue-600 hover:underline font-medium"
+                  className="font-medium text-violet-700 hover:underline"
                 >
                   dfrost3374@gmail.com
                 </Link>
