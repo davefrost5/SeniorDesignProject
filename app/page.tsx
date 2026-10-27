@@ -21,6 +21,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import syncDave from "@/app/images/syncdave.png";
 import syncCoop from "@/app/images/synccoop.png";
 import syncNick from "@/app/images/syncnick.png";
 import syncOwen from "@/app/images/syncowen.png";
@@ -71,6 +72,11 @@ const demoVideos: {
 ];
 
 const team = [
+  {
+    name: "David Frost",
+    role: "Software and AI/ML lead",
+    image: syncDave,
+  },
   {
     name: "Cooper Foote",
     role: "Hardware and manufacturing",
@@ -356,7 +362,7 @@ export default function Home(): React.ReactElement {
       <section className="sync-section relative">
         <div className="container mx-auto px-4">
           <h2 className="sync-heading mb-10 text-center">Team</h2>
-          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-3">
+          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 lg:grid-cols-4">
             {team.map((member) => (
               <div
                 key={member.name}
