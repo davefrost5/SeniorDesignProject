@@ -11,15 +11,16 @@ import {
 } from "@/components/home/brand-video-frame";
 import {
   Award,
+  ArrowDown,
   Brain,
   ChevronRight,
   Cpu,
   ExternalLink,
   Mail,
+  Radio,
   Users,
   Zap,
 } from "lucide-react";
-import syncDave from "@/app/images/syncdave.png";
 import syncCoop from "@/app/images/synccoop.png";
 import syncNick from "@/app/images/syncnick.png";
 import syncOwen from "@/app/images/syncowen.png";
@@ -73,22 +74,26 @@ const team = [
   {
     name: "David Frost",
     role: "Software and AI/ML lead",
-    image: syncDave,
+    image: null as string | null,
+    initials: "DF",
   },
   {
     name: "Cooper Foote",
     role: "Hardware and manufacturing",
     image: syncCoop,
+    initials: null,
   },
   {
     name: "Nicolas Accardo",
     role: "Backend and NeuroPype pipeline",
     image: syncNick,
+    initials: null,
   },
   {
     name: "Owen Deem",
     role: "Prototype development",
     image: syncOwen,
+    initials: null,
   },
 ];
 
@@ -117,14 +122,32 @@ const proofStats = [
   },
 ];
 
+const pipelineSteps = [
+  {
+    icon: Radio,
+    title: "Acquire",
+    body: "OpenBCI UltraCortex streams EEG over LSL into our pipeline.",
+  },
+  {
+    icon: Brain,
+    title: "Classify",
+    body: "CSP features and logistic regression on motor imagery (open vs. close).",
+  },
+  {
+    icon: Cpu,
+    title: "Actuate",
+    body: "Confidence gating, live GUI feedback, and Raspberry Pi motor control on the glove.",
+  },
+];
+
 function VideoDemoCard({
   video,
 }: {
   video: (typeof demoVideos)[number];
 }) {
   return (
-    <article className="sync-glass-card overflow-hidden">
-      <div className="border-b border-violet-100/80 bg-gradient-to-r from-blue-600/5 to-violet-600/5 px-6 py-5">
+    <article className="sync-panel overflow-hidden">
+      <div className="border-b border-indigo-400/10 bg-gradient-to-r from-indigo-500/10 to-violet-600/10 px-6 py-5">
         <h3 className="text-lg font-semibold">{video.title}</h3>
         <p className="mt-1 text-sm sync-subheading">{video.description}</p>
       </div>
@@ -132,14 +155,14 @@ function VideoDemoCard({
         <BrandVideoFrame src={video.src} orientation={video.orientation} />
         {video.linkedInPost && (
           <div className="mt-4 flex flex-wrap justify-center gap-2">
-            <Button asChild variant="outline" size="sm" className="border-violet-200/80 bg-white/80">
+            <Button asChild variant="outline" size="sm" className="sync-outline-btn">
               <Link href={video.linkedInPost} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Watch on LinkedIn
               </Link>
             </Button>
             {video.linkedInEmbed && (
-              <Button asChild variant="ghost" size="sm" className="text-violet-700">
+              <Button asChild variant="ghost" size="sm" className="text-violet-300">
                 <Link href={video.linkedInEmbed} target="_blank" rel="noopener noreferrer">
                   LinkedIn embed
                 </Link>
@@ -159,15 +182,15 @@ export default function Home(): React.ReactElement {
     <div className="sync-landing flex flex-col">
       {/* Hero */}
       <section className="sync-section relative overflow-hidden pt-4 md:pt-8">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(99,102,241,0.18),transparent)]" />
+        <div className="sync-section-glow" />
         <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-4xl space-y-6 text-center">
             <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
                 SYNC Prosthetics
               </span>
             </h1>
-            <p className="text-lg font-medium text-violet-900/70 md:text-xl">
+            <p className="text-lg font-medium text-violet-200/80 md:text-xl">
               Signal-Yielding Neuro Cognitive Prosthetics
             </p>
             <p className="mx-auto max-w-3xl text-base leading-relaxed sync-subheading md:text-lg">
@@ -180,12 +203,7 @@ export default function Home(): React.ReactElement {
               <Button asChild size="lg" variant="brand">
                 <Link href="#demo">Watch the demo</Link>
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-violet-200/80 bg-white/60 backdrop-blur-sm hover:bg-white/90"
-              >
+              <Button asChild size="lg" variant="outline" className="sync-outline-btn">
                 <Link href="/milestones">See milestones</Link>
               </Button>
             </div>
@@ -194,7 +212,7 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Proof strip */}
-      <section className="sync-section bg-gradient-to-b from-violet-100/25 via-blue-50/40 to-transparent">
+      <section className="sync-section relative">
         <div className="container mx-auto px-4">
           <h2 className="sync-heading mb-3 text-center">Proof we shipped</h2>
           <p className="mx-auto mb-10 max-w-2xl text-center text-sm sync-subheading">
@@ -204,11 +222,11 @@ export default function Home(): React.ReactElement {
             {proofStats.map((item) => (
               <Card
                 key={item.label}
-                className="sync-glass-card border-violet-100/60 transition-shadow hover:shadow-xl hover:shadow-indigo-900/5"
+                className="sync-panel border-indigo-400/10 transition-colors hover:border-violet-400/25"
               >
                 <CardContent className="space-y-3 pt-6">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/15 to-violet-500/20">
-                    <item.icon className="h-5 w-5 text-blue-600" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/15 ring-1 ring-violet-400/20">
+                    <item.icon className="h-5 w-5 text-violet-300" />
                   </div>
                   <p className="text-sm font-semibold leading-snug">{item.label}</p>
                   <p className="text-xs leading-relaxed text-muted-foreground">
@@ -227,11 +245,9 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Video / Demo */}
-      <section
-        id="demo"
-        className="sync-section scroll-mt-20 bg-gradient-to-b from-transparent via-violet-50/35 to-blue-50/30"
-      >
-        <div className="container mx-auto px-4">
+      <section id="demo" className="sync-section scroll-mt-20 relative">
+        <div className="sync-section-glow opacity-40" />
+        <div className="container relative mx-auto px-4">
           <div className="mx-auto max-w-5xl space-y-10">
             <div className="space-y-2 text-center">
               <h2 className="sync-heading">Demo and videos</h2>
@@ -252,44 +268,50 @@ export default function Home(): React.ReactElement {
         </div>
       </section>
 
-      {/* Tech stack */}
-      <section className="sync-section bg-gradient-to-b from-blue-50/30 via-white/50 to-violet-50/25">
+      {/* How it works - no personal photos */}
+      <section className="sync-section relative">
         <div className="container mx-auto px-4">
-          <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-2">
-            <div className="space-y-5">
+          <div className="mx-auto max-w-4xl space-y-10">
+            <div className="text-center md:text-left">
               <h2 className="sync-heading">How it works</h2>
-              <ul className="space-y-4 sync-subheading">
-                <li className="flex gap-3 rounded-xl border border-violet-100/60 bg-white/60 p-4 backdrop-blur-sm">
-                  <Zap className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
-                  OpenBCI UltraCortex streams EEG over LSL into our processing pipeline.
-                </li>
-                <li className="flex gap-3 rounded-xl border border-violet-100/60 bg-white/60 p-4 backdrop-blur-sm">
-                  <Brain className="mt-0.5 h-5 w-5 shrink-0 text-violet-600" />
-                  Common Spatial Patterns features feed logistic regression for motor
-                  imagery (open vs. close).
-                </li>
-                <li className="flex gap-3 rounded-xl border border-violet-100/60 bg-white/60 p-4 backdrop-blur-sm">
-                  <Cpu className="mt-0.5 h-5 w-5 shrink-0 text-indigo-600" />
-                  Confidence gating, live GUI feedback, and Raspberry Pi actuation close
-                  the loop on the orthotic glove.
-                </li>
-              </ul>
+              <p className="mt-2 max-w-2xl sync-subheading">
+                End-to-end path from brain signal to orthotic motion - the stack we demoed
+                at the Innovation Expo.
+              </p>
             </div>
-            <div className="relative h-72 overflow-hidden rounded-2xl border border-violet-200/50 shadow-lg shadow-indigo-900/10 md:h-80">
-              <Image
-                src={syncDave}
-                alt="SYNC Prosthetics demo"
-                fill
-                className="object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-violet-950/25 to-transparent" />
+            <div className="grid gap-6 md:grid-cols-3">
+              {pipelineSteps.map((step, index) => (
+                <div key={step.title} className="relative">
+                  <div className="sync-panel flex h-full flex-col gap-3 p-5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600/30 to-violet-600/30 ring-1 ring-violet-400/25">
+                      <step.icon className="h-5 w-5 text-violet-200" />
+                    </div>
+                    <p className="font-semibold text-violet-100">{step.title}</p>
+                    <p className="text-sm sync-subheading">{step.body}</p>
+                  </div>
+                  {index < pipelineSteps.length - 1 && (
+                    <ArrowDown className="mx-auto my-2 hidden h-5 w-5 text-violet-500/50 md:absolute md:-right-3 md:top-1/2 md:my-0 md:block md:-translate-y-1/2 md:rotate-[-90deg]" />
+                  )}
+                </div>
+              ))}
             </div>
+            <ul className="space-y-3 sync-subheading">
+              <li className="flex gap-3 rounded-xl border border-indigo-400/15 bg-secondary/40 p-4">
+                <Zap className="mt-0.5 h-5 w-5 shrink-0 text-blue-400" />
+                Real-time LSL streaming keeps inference aligned with live EEG.
+              </li>
+              <li className="flex gap-3 rounded-xl border border-indigo-400/15 bg-secondary/40 p-4">
+                <Brain className="mt-0.5 h-5 w-5 shrink-0 text-violet-400" />
+                Zero per-user calibration at expo - the trained pipeline generalized across
+                visitors.
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
       {/* Milestones teaser */}
-      <section className="sync-section bg-gradient-to-b from-violet-50/20 to-blue-50/35">
+      <section className="sync-section relative">
         <div className="container mx-auto px-4">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
@@ -299,11 +321,7 @@ export default function Home(): React.ReactElement {
                 {PROJECT_TIMELINE.expo}. Full build history on the milestones page.
               </p>
             </div>
-            <Button
-              asChild
-              variant="outline"
-              className="border-violet-200/80 bg-white/70 shrink-0"
-            >
+            <Button asChild variant="outline" className="sync-outline-btn shrink-0">
               <Link href="/milestones">
                 Full timeline
                 <ChevronRight className="ml-1 h-4 w-4" />
@@ -313,14 +331,14 @@ export default function Home(): React.ReactElement {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {milestones.map((m) => (
               <Link key={m.id} href={m.href} className="group">
-                <Card className="sync-glass-card h-full transition-all group-hover:-translate-y-0.5 group-hover:shadow-xl group-hover:shadow-indigo-900/10">
+                <Card className="sync-panel h-full transition-all group-hover:border-violet-400/30 group-hover:shadow-violet-900/20">
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between gap-2">
                       <Badge
                         className={
                           m.status === "Awarded"
-                            ? "bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90 border-0"
-                            : "border-0 bg-emerald-600/90 hover:bg-emerald-600"
+                            ? "border-0 bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90"
+                            : "border-0 bg-emerald-700/90 hover:bg-emerald-700"
                         }
                       >
                         {m.status}
@@ -344,23 +362,32 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Team */}
-      <section className="sync-section bg-gradient-to-b from-blue-50/40 via-violet-50/20 to-violet-100/25">
+      <section className="sync-section relative">
         <div className="container mx-auto px-4">
           <h2 className="sync-heading mb-10 text-center">Team</h2>
           <div className="mx-auto grid max-w-5xl grid-cols-2 gap-6 lg:grid-cols-4">
             {team.map((member) => (
               <div
                 key={member.name}
-                className="sync-glass-card flex flex-col items-center px-4 py-6 text-center"
+                className="sync-panel flex flex-col items-center px-4 py-6 text-center"
               >
-                <div className="relative mb-4 h-24 w-24 overflow-hidden rounded-full ring-2 ring-violet-300/50 ring-offset-2 ring-offset-white/80 sm:h-28 sm:w-28">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
+                {member.image ? (
+                  <div className="relative mb-4 h-24 w-24 overflow-hidden rounded-full ring-2 ring-violet-500/35 ring-offset-2 ring-offset-background sm:h-28 sm:w-28">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover object-top"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-violet-700 text-2xl font-bold text-white ring-2 ring-violet-500/35 ring-offset-2 ring-offset-background sm:h-28 sm:w-28"
+                    aria-hidden
+                  >
+                    {member.initials}
+                  </div>
+                )}
                 <p className="font-semibold">{member.name}</p>
                 <p className="text-sm text-muted-foreground">{member.role}</p>
               </div>
@@ -368,7 +395,7 @@ export default function Home(): React.ReactElement {
           </div>
           <p className="mt-8 text-center text-sm sync-subheading">
             Faculty advisor: Dr. Bernard Yett, Stevens ECE.{" "}
-            <Link href="/about/team" className="font-medium text-violet-700 hover:underline">
+            <Link href="/about/team" className="font-medium text-violet-300 hover:underline">
               Team page
             </Link>
           </p>
@@ -376,10 +403,10 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* What's next CTA */}
-      <section className="sync-section pb-20">
+      <section className="sync-section pb-20 relative">
         <div className="container mx-auto px-4">
-          <Card className="sync-glass-card mx-auto max-w-3xl overflow-hidden border-violet-200/60">
-            <div className="h-1 bg-gradient-to-r from-blue-600 via-violet-500 to-purple-600" />
+          <Card className="sync-panel mx-auto max-w-3xl overflow-hidden border-violet-500/20">
+            <div className="h-1 bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500" />
             <CardContent className="space-y-6 px-6 py-10 text-center sm:px-10">
               <h2 className="sync-heading text-2xl md:text-3xl">What is next</h2>
               <p className="mx-auto max-w-2xl leading-relaxed sync-subheading">
@@ -397,19 +424,14 @@ export default function Home(): React.ReactElement {
                     Get in touch
                   </Link>
                 </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="border-violet-200/80 bg-white/70"
-                >
+                <Button asChild size="lg" variant="outline" className="sync-outline-btn">
                   <Link href="/about">About David and SYNC</Link>
                 </Button>
               </div>
               <p className="text-sm">
                 <Link
                   href="mailto:dfrost3374@gmail.com"
-                  className="font-medium text-violet-700 hover:underline"
+                  className="font-medium text-violet-300 hover:underline"
                 >
                   dfrost3374@gmail.com
                 </Link>

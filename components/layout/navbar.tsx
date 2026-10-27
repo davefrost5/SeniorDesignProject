@@ -76,7 +76,7 @@ export function Navbar() {
   const demoActive = isHome;
 
   return (
-    <header className="border-b bg-background/80 backdrop-blur-sm fixed w-full top-0 z-50">
+    <header className="border-b border-indigo-400/10 bg-background/90 backdrop-blur-md fixed w-full top-0 z-50">
       <nav className="w-full px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 min-w-0">

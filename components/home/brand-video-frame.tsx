@@ -27,7 +27,7 @@ export function BrandVideoFrame({
     >
       <div
         className={cn(
-          "relative overflow-hidden rounded-[1.15rem] bg-gradient-to-br from-indigo-950/90 via-slate-900 to-violet-950/90",
+          "sync-video-surface relative overflow-hidden",
           isPortrait ? "aspect-[9/16]" : "aspect-video"
         )}
       >
@@ -37,7 +37,7 @@ export function BrandVideoFrame({
           preload="metadata"
           className={cn(
             "absolute inset-0 h-full w-full",
-            isPortrait ? "object-contain" : "object-contain sm:object-cover"
+            isPortrait ? "object-contain" : "object-contain"
           )}
         >
           <source src={src} type="video/mp4" />
