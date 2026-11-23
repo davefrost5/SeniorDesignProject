@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'SYNC Prosthetics - Signal-Yielding Neuro Cognitive Prosthetics',
-  description: 'Pioneering the future of neural interface prosthetics with cutting-edge technology and innovative solutions.',
+  description:
+    'Brain-controlled orthotic hand exoskeleton from Stevens senior design. L3Harris Innovation Award winner. EEG to actuation with zero-calibration motor imagery.',
 };
 
 export const viewport: Viewport = {
@@ -23,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className={`${inter.className} bg-background`} suppressHydrationWarning>
         <Providers>
           <div className="min-h-screen flex flex-col pt-16">
             <Navbar />

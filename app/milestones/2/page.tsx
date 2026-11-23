@@ -11,11 +11,17 @@ import m2Design from "@/app/images/m2-4design.png";
 import m2Gloves from "@/app/images/m2-2gloves.png";
 import m2Pull from "@/app/images/m2-2pull.png";
 import m2Push from "@/app/images/m2-2push.png";
+import { MilestonePageHeader } from "@/components/milestones/milestone-page-header";
+
 export default function Milestone2Page() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Milestone 2: Design & Development</h1>
+        <MilestonePageHeader
+          title="Milestone 2: Design and Development"
+          period="Fall 2024 - Spring 2025"
+          status="Completed"
+        />
         
         <Tabs defaultValue="plan" className="space-y-8">
           <TabsList className="grid grid-cols-6 w-full">

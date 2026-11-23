@@ -33,7 +33,7 @@ const teamMembers = [
     description: "NeuroPype Co-Lead and Neural Network Implementation Co-Lead",
   },
   {
-    name: "Nick Accardo",
+    name: "Nicolas Accardo",
     role: "Backend Programming Lead",
     email: "naccardo@stevens.edu",
     department: "Software Engineering",
